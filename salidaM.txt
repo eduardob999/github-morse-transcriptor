@@ -1,0 +1,17 @@
+
+Decodificación de Texto a Morse:
+
+e2dee1te
+te1dee2te
+thola
+mi nombre es: yusneyi
+
+mi cdula  es
+v-00.000.000
+eeete
+t
+Final de la comunicacion.
+Se transmitieron:
+- 10 mensajes
+- 15 palabras
+- 106 caracteres

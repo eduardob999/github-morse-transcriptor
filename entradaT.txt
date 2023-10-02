@@ -1,0 +1,6 @@
+// Texto en el archivo entradaT.txt
+La lectura es importante porque:
+1) Nos mantiene informados
+2) Aumenta nuestro conocimiento
+3) Permite descubrir y explorar
+4) Mejora nuestra comunicacion

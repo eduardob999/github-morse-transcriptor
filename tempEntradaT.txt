@@ -1,0 +1,13 @@
+// Archivo tempEntradaT.txt
+// Listado original de ciudades y temperaturas en grados Celsius:
+Barquisimeto, 29
+Buenos Aires, 14
+Estambul, 24
+Londres, 18
+Caracas, 24
+Tokio, 30
+Sidney, 13
+Merida, 17
+Ciudad de Mexico, 19
+Madrid, 30
+Moscu, 11

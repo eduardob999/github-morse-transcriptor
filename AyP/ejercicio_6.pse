@@ -1,0 +1,67 @@
+Clase Main
+    // Atributos
+
+    Privado:
+        Tipo Archivo File De Caracter;
+        File Letras.txt, log;
+    // Métodos
+
+    Publico:
+        Acción SaveLog()
+            // Se guarda un archivo log con todos los carcateres encontrados
+            Lógico bool; Caracter tempc;
+            bool = Falso;
+            AbrirArchivo( Letras.txt, "C:/file", LecturaYTexto);
+            AbrirArchivo( log, "C:/file", LecturaYAñadirYTexto );
+            Repetir
+                tempc = LeerArchivo( Letras.txt );
+                Repetir
+                    Si tempc == LeerArchivo( log ) Entonces
+                        bool = Verdadero;
+                    FinSi;
+                Hasta FDA( log );
+                Si bool = Falso Entonces
+                    EscribirArchivo( log, tempc );
+                FinSi
+            Hasta FDA( Letras.txt );
+            CerrarArchivo( Letras.txt );
+            CerrarArchivo( log );
+        FAcción;
+
+        Acción PrintOcc()
+            // Se muestran las ocurrencias de cada caracter guardado
+            Caracter tempc; Entero count;
+            count = 0;
+            AbrirArchivo( log, "C:/file", LecturaYTexto );
+            Repetir
+                tempc = LeerArchivo( log );
+                AbrirArchivo( Letras.txt, "C:/file", LecturaYTexto);
+                Repetir
+                    Si tempc = LeerArchivo( Letras.txt ) Entonces
+                        count = count + 1;
+                    FinSi
+                HAsta FDA( Letras.txt );
+                Escribir("El caracter '" + tempc + "' se encontró " + count + " veces." );
+                count = 0:
+                CerrarArchivo( Letras.txt )
+            Hasta FDA( log );
+            CerrarArchivo( log );
+        FAcción;
+
+        Acción ¬Main()
+            LiberarMemoria();
+        FAcción;
+FClase;
+
+Acción Principal
+    Main m;
+    m.SaveLog();
+    m.PrintOcc();
+    m.¬Main()
+FAcción;
+
+
+
+
+
+

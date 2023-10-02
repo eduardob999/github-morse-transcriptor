@@ -1,0 +1,323 @@
+//---------------------------------------------------------------------//
+//                                                                     //
+//                    Transcriptor de Código Morse                     //
+//                                                                     //
+//---------------------------------------------------------------------//
+// Codigo finalizado el día 11/9/23
+// Programa desarrollado por Eduardo Bogado
+// Universidad Central de Venezuela
+// Github user eduardob999
+// Prof. Yusneiyi Carballo.
+
+Clase Conversion Hereda de Menu
+
+    // Métodos
+    
+    publico:
+
+        // Constructor
+        
+        Acción Conversion()
+            
+            // Opción 1 - Identificación del equipo.
+            
+            string dummy;
+
+            // Inicialización de mensjaes
+
+            prompt = "Opcion 5 - Conversion de mensajes desde archivos.
+                      
+                      Menu:
+                        1.  Leer mensaje en texto
+                        2.  Leer mensaje en Codigo Morse
+                        3.  Ordenar y listar archivo tempEntrada.txt
+                        4.  Procesamiento y calculos del archivo tempEntrada.txt
+                        5.  Volver al menu principal
+                      
+                      Por favor, indique su opcion:";
+
+            condition = "Debe ingresar un numero entero entre 1 y 5.
+                        Ingrese su opcion nuevamente:";
+
+            dictionary = "	1	2	3	4	5	";
+
+            // Procesamiento
+
+            Repetir
+        
+                // En este ciclo se controla la ejecicón y salida del programa
+                // la variable inp se emplea como bandera
+
+                Input( 1, 1, Falso );
+
+                // Se inicializa el parametro input
+
+                Selección
+
+                    aEntero( input ) == 1 : 
+
+                        Encrypter e2.Encrypter( "entradaT.txt", "salidaT.txt" );
+
+                    aEntero( input ) == 2 :
+
+                        Decrypter d2.Decripter( "entradaM.txt",  "salidaM.txt" );
+
+                    aEntero( input ) == 3 : 
+
+                        Special s1.Special1( "tempEntradaT.txt", "tempSalidaT.txt" );
+
+                    aEntero( input ) == 4 :
+
+                        Special s2.Special2( "tempEntradaT.txt" );
+
+                    aEntero( input ) == 4 : 
+
+                        // Salida por defecto
+
+                FSelección;
+
+            Hasta ( input == "5" );
+            
+        FAcción;
+
+FClase;
+
+Clase Special Hereda de Interpreter
+
+    // Atributos
+
+    privado:
+
+        int n;
+        int m;
+        Arreglo matrix de string[n,m];
+    
+    // Métodos
+
+    publico:
+
+        // Constructores
+
+        Acción Special1( string filename )
+
+            // Declaración e inicialización de variables
+
+            int i, sum;
+            i = 0;
+            sum = 0;
+
+            // Las variables no declaradas son atributos de las superclases.
+
+            prompt = "Cual ciudad desea consultar?";
+
+            condition = "La ciudad ingresada debe coincidir de manera exacta con alguna de las incluidas en el archivo de entrada.";
+
+            // Procesamiento
+
+            Escribir("Opcion 5.4 - Procesamiento y calculos
+                    
+                     Ciudad o ciudades con la menor y la mayor temperatura en grados Celcius:");
+
+            ReadMatrix( filename );
+            Sort( Falso );
+
+            Repetir
+
+                Escribir("Menor:" + matrix[0][i] + ", " + matrix[1][i] );
+                i = i + 1;
+
+            Hasta ( matrix[1][i] == matrix[1][i-1] Y i < m );
+
+            i = m;
+            
+            Repetir
+
+                Escribir("Mayor:" + matrix[0][i-1] + ", " + matrix[1][i-1] );
+                i = i - 1;
+
+            Hasta ( matrix[1][i-1] == matrix[1][i] Y i > 0 );
+
+            Para i = 1 hasta i = m hacer
+
+                sum = sum + atoi( matrix[1][i].c_str() );
+            
+            FPara
+            
+            Escribir("- Temperatura promedio: " +
+                    sum / m + " grados Celcius.");
+
+            dictionary = "	";
+
+            Para ( i = 0; i < m) hacer
+
+                dictionary = dictionary + matrix[0][i] + "	";
+            
+            FPara;
+
+            Input( 1, 10, Verdadero );
+
+            i = 0;
+
+            Repetir
+
+                i = i + 1;
+
+            Hasta ( input == matrix[0][i] );
+
+            Escribir( "La temperatura en " + input + " es: " + matrix[1][i] + " grados." );
+
+            input = "La temperatura en " + matrix[0][i] + " es: " + matrix[1][i] + " grados.";
+
+            dictionary = "	";
+            
+            setDictionary( 0 );
+
+            ConvertText();
+
+            Escribir( procesed );
+
+        FAcción
+
+        Acción Special2( string filename, string out )
+
+            // Declaración e inicialización de variables
+
+            string dummy, combined;
+            combined = "";
+
+
+            // Procesamiento
+
+            ReadMatrix( filename );
+            Sort( Verdadero );
+
+            combined = "Listado de ciudades y temperaturas en grados Celsius, ordenados por ciudad:" 
+            + sorted + "";
+
+            Sort( Falso );
+
+            combined = combined + "Listado de ciudades y temperaturas en grados Celsius, ordenados por temperatura:" 
+            + sorted;
+
+            Escribir( combined );
+            SaveFile( out, combined );
+
+            Escribir("El resultado del ordenamiento fue guardado satisfactoriamente en el archivo " << out <<
+            "Presione ENTER para volver al menu anterior.");
+
+            Leer( dummy );
+
+        FAcción
+
+        // Operaciones
+
+        Acción ReadMatrix( string filename ) {
+
+            // Inicializa la matriz con los datos de ciudades y temperaturas
+                  
+        }
+
+        Acción Sort( booleano city )
+
+            // Declaración e inicialización de veriables
+
+            int i, j;
+            string temp;
+            sorted = "";
+
+
+            Si ( city ) Entonces
+
+                Para i = 0 hasta i = m hacer
+
+                    Para j = 0 hasta j = m hacer
+
+                        Si ( matrix[0][j] > matrix[0][j+1] )
+
+                            temp = matrix[0][j]; matrix[0][j] = matrix[0][j+1]; matrix[0][j+1] = temp;
+                            temp = matrix[1][j]; matrix[1][j] = matrix[1][j+1]; matrix[1][j+1] = temp;
+                            
+                        FSi;
+                        
+                    FPara
+                
+                FPara
+
+            Sino
+
+                Para i = 0 hasta i = m hacer 
+
+                    Para j = 0 hasta j = m hacer
+
+                        Si ( atoi( matrix[1][j].c_str() ) > atoi( matrix[1][j+1].c_str() ) )
+
+                            temp = matrix[0][j]; matrix[0][j] = matrix[0][j+1]; matrix[0][j+1] = temp;
+                            temp = matrix[1][j]; matrix[1][j] = matrix[1][j+1]; matrix[1][j+1] = temp;
+                            
+                        FSi;
+                        
+                    FPara;
+                
+                FPara;
+
+            FSi;
+
+            Para j = 0 hasta j = m hacer
+
+                    sorted = sorted + matrix[0][j] + ", " + matrix[1][j] + "";
+            
+            FPara
+ 
+        FAcción
+
+        Acción ConvertText()
+
+            // Esta acción procesa las entradas de texto y las convierte en morse.
+            // Declaración de variables.
+
+            int i, ind, q;
+
+            // Inicialización de variables.
+
+            procesed = "";
+
+            // Procesamimiento de la cadena de entrada.
+
+            Para i = 0 hasta i < input.longitud() hacer
+
+                // Este ciclo verifica cada letra de la entrada
+                // se reutiliza el método search en esta acción
+
+                Search( i, ind, 1 );
+
+                Si ( interpreter[1][ind-1] == "/" || i - 1 > input.longitud() ) Entonces
+                
+                    // Este condicional cuenta la cantidad de palabras y las almacena en "palen".
+
+                    palen = palen + 1;
+
+                FSi;
+
+                Si ( interpreter[0][ind-1] == "#") Entonces
+                    
+                    procesed = procesed + "";
+                    palen = palen + 1;
+                    cantmsg = cantmsg + 1;
+
+                Sino
+                    
+                    procesed = procesed + interpreter[1][ind-1] + " ";
+
+                FSi;
+                
+            FPara;
+
+            // Procesamiento de datos intermedios.
+
+            cantmsg = cantmsg + 1;
+            cantpal = cantpal + "- Mensaje " + cantmsg + ": " + palen + " palabra(s)";
+            totpal = totpal + palen;
+
+        FAcción;
+         
+FClase;

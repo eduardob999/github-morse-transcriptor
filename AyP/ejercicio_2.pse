@@ -1,0 +1,184 @@
+// Ejericio 2
+
+// Registro: (interno)
+// Carro
+// ------
+// Placa
+// Marca
+// Modelo
+// Cilindrada
+// Precio
+
+// Arreglo: (externo)
+
+Acción Principal
+    // Seproecesan los datos para un conjunto de carros
+    Entero n, i ; 
+    string prompt;
+    Tipo Archivo file de Entero;
+    file f1, f2;
+
+    prompt = "la cantida de carros. Debe ser un número entero mayor o igual a 1."
+    InputN( n , prompt );
+
+    Tipo Registro Carro=
+        String placa;
+        String marca;
+        String modelo;
+        Real cilindrada;
+        Real precio;
+    FRegistro;
+
+    Tipo Arreglo Vector de Carro [1..n];
+    Vector V;
+
+    InputV( V, n );
+    Precio( V, n );
+    Save( V, n, f1, falso, falso, falso, Verdadero );
+    Print1( V, n, f1 );
+    Save( V, n, f2, Verdadero, Verdadero, Verdadero, Verdadero );
+    Print2( V, n, f1 );
+    
+FAcción;
+
+Acción InputN( Ref Entero n, prompt );
+    Repetir
+        // Se solicita un dato de entrada de tipo entero
+        Escribir( "Por favor ingrese " + prompt);
+        Leer( n );
+    Hasta ( n >= 1 );
+FAcción;
+
+Accción InputV( Ref Vector V, Entero n)
+    // Se inicializa al vector
+    Entero i;
+    Para i = 1 hasta n hacer
+        string prompt; 
+        prompt = "la placa del carro " + aString( i );
+        InputS( V[i].placa, prompt );
+        prompt = "la marca del carro " + aString( i );
+        InputS( V[i].marca, prompt );
+        prompt = "el modelo del carro " + aString( i );
+        InputS( V[i].modelo, prompt );
+        prompt = "la cilindrada del motor del carro " + aString( i );
+        InputR( V[i].cilindrada, prompt );
+        prompt = "el precio del carro " + aString( i );
+        InputR( V[i].precio, prompt );
+    FPara;
+FAcción;
+
+InputS( Ref string s, string prompt )
+    // Se solicita una string
+    Repetir
+            Escribir( "Por facor ingrese "+ prompt );
+            Leer( t );
+    Hasta NO( t == "" );
+FAcción;
+
+Acción InputR( Ref Entero x, prompt );
+    // Se solicita un número real
+    Repetir
+        Escribir( "Por favor ingrese " + prompt);
+        Leer( x );
+    Hasta ( x > 0 );
+FAcción;
+
+Acción Precio( V, n )
+    // Se listan los precios de los vehículos con las especificaciones indidcada
+    String lista;
+    Entero i;
+    Logico flag;
+    flag = falso;
+    Escribir("A continuación se muestra los precios de los carros con cilindrada de 
+              2.2 Litros");
+    Para i = 1 hasta n hacer
+        Si V[i].cilindrada == 2.2 Entonces
+            Escribir("El carro de placa"+ V[i].placa +" Tiene un precio de 
+                      "+ V[i].precio);
+            flag = Verdadero;
+        FinSi
+    FPara;
+    Si flag == falso Entonces
+        Escribir("No se encontró ningún carro que tuviera las especificaciones requeridas.")
+    FSi;
+FAcción;
+
+Acción Save( Vector V, file f, Entero n, Lógico marca, Lógico motor, Lógico minimo, Lógico maximo );
+    // Se guardan los índices con las especificaciones indicadas
+    string prompt, mar, mot;
+    Real min, max;
+    Entero i;
+
+    Escribir("Se proceden a guadar los carros con las características indicadas: ");
+
+    Si marca Entonces
+        prompt = "la marca buscada ";
+        InputS( mar, prompt );
+    FSi;
+
+    Si motor Entonces
+        prompt = "el motor buscado ";
+        InputS( mot, prompt );
+    FSi;
+    
+    Si minimo Entonces
+        prompt = "el minimo precio buscado ";
+        InputR( min, prompt );
+    FSi;
+
+    Si maximo Entonces
+        prompt = "el maximo precio buscado ";
+        InputR( max, prompt );
+    FSi;
+
+    AbrirArchivo( f, "C:/file", EscrituraYTexto)
+    Para i = 1 hasta n hacer
+        Si ( ( marca Y mar == V[i].marca ) O NO marca ) Y
+           ( ( motor Y mar == V[i].motor ) O NO motor ) Y
+           ( ( minimo Y min < V[i].precio ) O NO minimo ) Y
+           ( ( maximo Y max > V[i].precio ) O NO maximo ) Entonces
+           EscribirArchivo( f, i );
+    FPara;
+    CerrarArchivo( f );
+FAcción;
+
+Acción Print1( V, n, f1 );
+    // Se imprime el minimo y el mayor preico para los datos indicados
+    Entero min, max;
+    min = 99999999;
+    max = -1;
+    Entero i;
+    Entero read;
+
+    AbrirArchivo( f1, "C:/file", LecturaYTexto);
+    Si FDA( f1 ) Entonces
+        Escribir("No se econtraron datos con las especificaciones dadas");
+    Sino
+        Repetir
+        LeerArchivo( fi, i );
+        Si V[i].precio < min Entonces
+            min = V[i].precio;
+        FSi;
+        Si V[i].precio > max Entonces
+            min = V[i].precio;
+        FSi;
+        Hasta FDA( f1 );
+    FinSi
+
+    Escribir("El menor precio para las especioficaciones dadas es "+ min );
+    Escribir("El mayor precio para las especificaciones dades es "+ max);
+    CerrarArchivo( f1)
+
+FAcción;
+
+Acción Print2( V, n, f2 );
+    // Se listan los datos de placa y precio para las coincidencias
+    Entero i;
+    Escribir("A continuación una lista con la placa y precio pàra las especificaciones dadas ");
+    AbrirArchivo( f2, "C:/file", LecturaYTexto );
+    Repetir
+        LeerArchivo( f2, i );
+        Escribir( "Placa: "+ V[i].placa +"Precio: "+ V[i].precio );
+    Hasta FDA(F2);
+    CerrarArchivo( f2 );
+FAcción;

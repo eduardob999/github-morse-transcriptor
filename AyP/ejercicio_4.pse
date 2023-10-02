@@ -1,0 +1,122 @@
+Acción Princpipal
+    Entero n, x, sum;
+    Tipo Arreglo Counter De entero[ 1.. 4 ];
+    Counter count;
+    Escribir("Indique el tamaño de la matriz cuadrada.");
+    InputE( n, 1 );
+    Tipo Arreglo Matrix De Entero [1..n,1..n];
+    Matriz M;
+    Escribir("A continuación ingrese las entradas de la matriz.");
+    InitM( M, n, sum );
+    Escribir("A continuación la suma de los elementos de la diagonal secundaria.");
+    SumM( M, n );
+    Escribir("A continucación el promedio de todos los valores.");
+    Prom( M, n, sum );
+    Escribir("A continuación los elementos en orden descendente.");
+    PrintDes( M, n );
+    Tipo Arreglo Posición De Entero [ 2 ];
+    Posición p;
+    Tipo Archivo File De Posición;
+    File f;
+    Escribir( "A continuacuón se guarda en un archivo las coincidencias con el número que ingrese y se listan las posiciones de las coicidencias.");
+    Save-PrintFile( M, n, f, p, count );
+    Escribir( "A continuacuón se muestra la cantidad de veces que fue encontrado el valor ingresado en cada fila:
+              Fila 1: " + cont[1] + "
+              Fila 2: " + cont[2] + "
+              Fila 3: " + cont[3] + "
+              Fila 4: " + cont[4]);
+FAcción;
+
+Acción InputE( Ref Entero n; Entero case )
+    Si case == 1 Entonces
+        Repetir
+            Escribir("Suministre un entero positivo.");
+            Leer(n);
+        Hasta n > 0 ;
+    FSi;
+    Si case == 2
+        Escribir("Suministre un número entero.");
+        Leer(n);
+    FinSi;
+FAcción;
+
+Acción InitM( Ref Matrix M; Entero n; Ref Entero sum )
+    Entero i, j;
+    sum = 0;
+    Para i = 1 hasta n hacer
+        Para j = 1 hasta n hacer
+            Escribir("Ingrese la entrada " + i + ", " + j );
+            InputE( M[ i, j ], 2 );
+            sum = sum + M[ i, j ];
+        FPara;
+    FPara;
+FAcción;
+
+Acción SumM( Matrix M; Entero n )
+    Entero i, j;
+    sum = 0;
+    Para i = 1 hasta n hacer
+        sum = sum + M[ i, n - i + 1 ];
+    FPara;
+    Escribir( sum );
+FAcción;
+
+Acción Prom( Matrix M; Entero n, sum )
+    Escribir( sum / ( n * n ) );
+FAcción;
+
+Acción PrintDes( Matrix M; Entero n )
+    Tipo Arreglo Array de entero[ 1..n*n ]
+    Array a;
+    PrintDesA( M, n, a );
+FAcción;
+
+Acción PrintDesA( Matriz M, Entero n, Arreglo a )
+    Entero i, j;
+    Para j = 1 hasta n hacer
+        Para i = 1 hasta n hacer
+            a[ j + ( i - 1 ) * n ] = M[ j, i ];
+        FPara
+    FPara
+    SortDes( a );
+    Para i = 1 hasta n * n hacer
+        Escribir( a[i] + ", " );
+    FPara;
+FAcción;
+
+Acción SortDes( Array a )
+    Entero i, j, bott, tempi;
+    Para i = 1 hasta n - 1 hacer
+        tempi = i;
+        bott = a[i]
+        Para j = i + j hasta n hacer
+            Si ( a[j] < bott ) Entonces
+                tempi = j;
+                bott = a[j];
+            FSi;
+        FPara;
+        a[tempi] = a[i];
+        a[i] = bott;
+    FPara
+FAcción;
+        
+Acción Save-PrintFile( Matrix M, Entero n; Ref File f; Posición p; Ref Counter count )
+    Entero i, j, x, tempc;
+    count = { 0, 0, 0, 0 };
+    tempc = 0;
+    InputE( x, 2 );
+    AbrirArchivo( f, "C:/file", TextoYEscritura )
+    Para i = 1 hasta n hacer
+        Para j = 1 hasta n hacer
+            Si x == M[i,j] Entonces
+                cont = cont + 1;
+                EscribirArchivo( f, { i, j } );
+                Escribir( "{ " + i + ", " + j " }" );
+                tempc = tempc + 1;
+            FinSi;
+        FPara;
+    count[i] = tempc;
+    tempc = 0;
+    FPara;
+    CerrarArchivo( f );
+FAcción;

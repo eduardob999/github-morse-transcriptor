@@ -1,0 +1,27 @@
+Listado de ciudades y temperaturas en grados Celsius, ordenados por ciudad:
+
+Barquisimeto, 29
+Buenos Aires, 14
+Caracas, 24
+Ciudad de Mexico, 19
+Estambul, 24
+Londres, 18
+Madrid, 30
+Merida, 17
+Moscu, 11
+Sidney, 13
+Tokio, 30
+
+Listado de ciudades y temperaturas en grados Celsius, ordenados por temperatura:
+
+Moscu, 11
+Sidney, 13
+Buenos Aires, 14
+Merida, 17
+Londres, 18
+Ciudad de Mexico, 19
+Caracas, 24
+Estambul, 24
+Barquisimeto, 29
+Madrid, 30
+Tokio, 30
