@@ -6,5 +6,5 @@ c++ code morse transcriptor
 Final version
 </p>
 <p>
-Open for the puclic to use and modify
+Open for the public to use and modify
 </p>
